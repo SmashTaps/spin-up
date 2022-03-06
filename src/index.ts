@@ -13,7 +13,7 @@ import {
 } from "./__templates__/settingsTemplates";
 import jhsf from "./jhsf";
 import { exec } from "child_process";
-import ora from "ora";
+
 async function run() {
   const devPath = `src/__templates__/`;
   const prodPath = `node_modules/@smashtaps/spin-up/src/__templates__/`;
@@ -23,8 +23,6 @@ async function run() {
     const data: any = await readInput();
 
     jhsf(data.howDoYouFeel);
-
-    const spinner = ora("\nConstructing code").start();
 
     const stackOptions = {
       stackName: data.nestedStackName,
@@ -41,8 +39,6 @@ async function run() {
       apiName: data.apiName,
       nodeJsRunTime: data.nodeJsRunTime,
     };
-
-    spinner.text = "Generating tempaltes";
 
     const getConstructCode = render(getLambdaConstuct, stackOptions);
     const postConstructCode = render(postLambdaConstruct, stackOptions);
@@ -74,8 +70,6 @@ async function run() {
           : "",
     };
 
-    spinner.text = "Rendering files";
-
     renderToFolder(
       templatePath + "index.ts",
       data.nestedStackPath,
@@ -88,8 +82,6 @@ async function run() {
       settingsTsTemplateData
     );
 
-    spinner.text = "Importing business logic";
-
     try {
       if (data.apiEndPoints.indexOf("GET") !== -1) {
         clone(
@@ -101,12 +93,13 @@ async function run() {
             exec(
               `cd ${data.nestedStackPath}/lambdaFns/get && rm -rf .gitignore`
             );
+            exec(`cd ${data.nestedStackPath}/lambdaFns/get && npm i`);
           }
         );
       }
 
       if (data.apiEndPoints.indexOf("POST") !== -1) {
-        await clone(
+        clone(
           "https://github.com/smashtaps/__templates_create__.git",
           `${data.nestedStackPath}/lambdaFns/create`,
           undefined,
@@ -115,11 +108,11 @@ async function run() {
             exec(
               `cd ${data.nestedStackPath}/lambdaFns/create && rm -rf .gitignore`
             );
+            exec(`cd ${data.nestedStackPath}/lambdaFns/create && npm i`);
           }
         );
       }
-      spinner.text = "Done 🎉 Happy Coding ❤️";
-      spinner.stopAndPersist();
+      console.log("Generating stuff... Please wait");
     } catch (error) {
       console.log(error);
     }
