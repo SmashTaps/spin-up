@@ -44,8 +44,5 @@ export function getSettings(env: DevEnv = "dev", appName: string) {
     getHandlerSettings: {
       ...settings.getHandlerSettings,
     },
-    deactivateHandler: {
-      ...settings.deactivateHandler,
-    },
   };
 }
