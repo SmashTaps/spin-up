@@ -7,21 +7,21 @@ import { DevEnv } from "../types";
 const settings = {
   // Dynamodb Table
   dynamoDBTable: {
-    tableName: "{{dbTableName}}",
-    billingMode: dynamo.BillingMode.{{dbBillingMode}},
-    removalPolicy: core.RemovalPolicy.{{dbRemovalPolicy}},
+    tableName: "myTable",
+    billingMode: dynamo.BillingMode.PAY_PER_REQUEST,
+    removalPolicy: core.RemovalPolicy.DESTROY,
     partitionKey: {
       name: "id",
       type: dynamo.AttributeType.STRING,
     },
   },
 
-  {{createHandlerSettingsCode}}
-  {{getHandlerSettingsCode}}
+  
+  
 
   // API gateway settings
   apigwSettings: {
-    restApiName: "{{apiName}}",
+    restApiName: "my-api",
   },
 };
 

@@ -6,27 +6,27 @@ import * as path from "path";
 import { DevEnv } from "../types";
 import { getSettings } from "./settings";
 
-export interface {{stackNameCap}}Props extends cdk.NestedStackProps {
+export interface MyStackProps extends cdk.NestedStackProps {
   readonly devEnv: DevEnv;
   readonly appName: string;
 }
 
-export default class {{stackNameCap}} extends cdk.NestedStack {
+export default class MyStack extends cdk.NestedStack {
   public readonly table: dynamo.Table;
 
-  constructor(scope: cdk.Construct, id: string, props: {{stackNameCap}}Props) {
+  constructor(scope: cdk.Construct, id: string, props: MyStackProps) {
     super(scope, id, props);
 
-    const settings = getSettings(props.devEnv, props.appName);
+    const settings = getSettings(props.devEnv);
 
 
-    this.table = new dynamo.Table(this, `${props.appName}{{stackNameCap}}Table`, {
+    this.table = new dynamo.Table(this, `${props.appName}MyStackTable`, {
       ...settings.dynamoDBTable,
     });
 
 
-    {{apigatewayConstructCode}}
-    {{getConstructCode}}
-    {{postConstructCode}}
+    
+    
+    
   }
 }

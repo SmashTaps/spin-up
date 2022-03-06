@@ -15,6 +15,10 @@ import jhsf from "./jhsf";
 import { exec } from "child_process";
 import ora from "ora";
 async function run() {
+  const devPath = `src/__templates__/`;
+  const prodPath = `node_modules/@smashtaps/spin-up/src/__templates__/`;
+  const templatePath = prodPath;
+
   try {
     const data: any = await readInput();
 
@@ -71,14 +75,15 @@ async function run() {
     };
 
     spinner.text = "Rendering files";
+
     renderToFolder(
-      "node_modules/@smashtaps/spin-up/src/__templates__/index.ts",
+      templatePath + "index.ts",
       data.nestedStackPath,
       indexTsTemplateData
     );
 
     renderToFolder(
-      "node_modules/@smashtaps/spin-up/src/__templates__/settings.ts",
+      templatePath + "settings.ts",
       data.nestedStackPath,
       settingsTsTemplateData
     );
