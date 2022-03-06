@@ -38,7 +38,7 @@ async function readInputs() {
       type: "rawlist",
       name: "nodeJsRunTime",
       message: "Select NodeJS runtime.",
-      choices: ["NODE_12_X", "NODE_14_X", "NODE_16_X"],
+      choices: ["NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X"],
       default: "NODE_14_X",
     },
     {
