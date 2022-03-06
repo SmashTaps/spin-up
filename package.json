@@ -1,6 +1,6 @@
 {
   "name": "@smashtaps/spin-up",
-  "version": "0.0.0-beta",
+  "version": "0.0.1-beta",
   "description": "",
   "main": "build/index.js",
   "scripts": {
